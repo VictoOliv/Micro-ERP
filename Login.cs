@@ -7,7 +7,7 @@ namespace cadastro_cliente
 {
     public class Login
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             User user = new User { senha = string.Empty };
             UserService userService = new UserService();
@@ -40,7 +40,7 @@ namespace cadastro_cliente
                     if (valid)
                     {
                         Console.WriteLine("Login efetuado com sucesso.");
-                        Menu.Main(Array.Empty<string>());
+                        Menu.Opcoes(Array.Empty<string>());
                         break;
                     }
                     else

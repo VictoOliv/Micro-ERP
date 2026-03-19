@@ -1,11 +1,15 @@
-﻿using cadastro_cliente.Model;
+﻿using cadastro_cliente.Conn;
+using cadastro_cliente.Model;
+using cadastro_cliente.Repository;
 using System;
 namespace cadastro_cliente
 {
     public class Menu
     {
-        public static void Main(string[] args)
+        public static void Opcoes(string[] args)
         {
+            string connString = "Host=localhost;Username=postgres;Password=postgres;Database=Challenger";
+
             while (true)
             {
                 Console.Clear();
@@ -25,12 +29,11 @@ namespace cadastro_cliente
                 switch (input)
                 {
                     case "1":
-                        // TODO: chamar método para alterar conta logada
                         Console.WriteLine("Alterar conta logada selecionado.");
+                        Login.Main([]);
                         break;
                     case "2":
-                        // TODO: chamar método para cadastrar cliente
-                        Console.WriteLine("Cadastrar Cliente selecionado.");
+                        ClientConn.CadastrarClienteMenu(connString);
                         break;
                     case "3":
                         // TODO: chamar método para cadastrar produto

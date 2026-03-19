@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using cadastro_cliente.Model;
+using Npgsql;
 using System;
 
 namespace cadastro_cliente.Repository
@@ -14,15 +15,13 @@ namespace cadastro_cliente.Repository
 
         public bool ValidateCredentials(string email, string senha)
         {
-            string connString = "Host=localhost;Username=postgres;Password=postgres;Database=Challenger";
             string query = "SELECT COUNT(1) FROM usuarios WHERE email = @u AND senha = @p";
 
             try
             {
-                NpgsqlConnection conn = new NpgsqlConnection(connString);
+                using NpgsqlConnection conn = new NpgsqlConnection(this.connString);
                 conn.Open();
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
-
+                using NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("u", email);
                 cmd.Parameters.AddWithValue("p", senha);
 
@@ -30,7 +29,7 @@ namespace cadastro_cliente.Repository
                 int count = result == null ? 0 : Convert.ToInt32(result);
                 return count > 0;
             }
-            catch (Exception)
+            catch (NpgsqlException)
             {
                 return false;
             }

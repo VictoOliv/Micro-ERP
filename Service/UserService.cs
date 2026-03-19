@@ -5,8 +5,6 @@ namespace cadastro_cliente.Service
 {
     public class UserService
     {
-        public UserService() { }
-
         public bool ValidationUser(User user)
         {
 
