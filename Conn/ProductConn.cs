@@ -4,49 +4,43 @@ using System;
 
 namespace cadastro_cliente.Conn
 {
-    public class ClientConn
+    public class ProductConn
     {
-        public static void CadastrarClienteMenu(string connString)
+        public static void CadastrarProdutoMenu(string connString, decimal v)
         {
-            ClientService clientService = new ClientService(connString);
-            Client cliente = new Client();
+            ProductService productService = new ProductService(connString);
+            Product product = new Product();
 
             while (true)
             {
                 try
                 {
-                    Console.WriteLine("\n-- Cadastro de Cliente --\n");
+                    Console.WriteLine("\n-- Cadastro de Produto --\n");
                     Console.Write("Digite -1 em qualquer campo para cancelar\n\n");
 
-                    Console.Write("Digite o nome do cliente: ");
-                    cliente.nome = Console.ReadLine() ?? string.Empty;
+                    Console.Write("Digite o nome do produto: ");
+                    product.nome = Console.ReadLine() ?? string.Empty;
 
-                    if (cliente.nome == "-1")
+                    if (product.nome == "-1")
                     {
                         Console.WriteLine("Cadastro cancelado.");
                         break;
                     }
 
-                    Console.Write("Digite o telefone do cliente: ");
-                    cliente.telefone = Console.ReadLine() ?? string.Empty;
+                    Console.Write("Digite o preco do produto: ");
+                    product.preco = v;
 
-                    if (cliente.telefone == "-1")
-                    {
-                        Console.WriteLine("Cadastro cancelado.");
-                        break;
-                    }
+                    Console.Write("Digite o código do produto: ");
+                    product.codigo = Console.ReadLine() ?? string.Empty;
 
-                    Console.Write("Digite o limite de crédito: ");
-                    cliente.limite_credito = Console.ReadLine() ?? string.Empty;
-
-                    if (cliente.limite_credito == "-1")
+                    if (product.codigo == "-1")
                     {
                         Console.WriteLine("Cadastro cancelado.");
                         break;
                     }
 
                     //Mensagem de confirmação
-                    (bool sucesso, string mensagem) = clientService.CadastrarCliente(cliente);
+                    (bool sucesso, string mensagem) = productService.CadastrarProduto(product);
 
                     Console.WriteLine($"\n{mensagem}\n");
 
@@ -60,7 +54,7 @@ namespace cadastro_cliente.Conn
                     {
                         Console.WriteLine("Pressione qualquer tecla para tentar novamente...");
                         Console.ReadKey();
-                        cliente = new Client(); // Limpa os dados para novo cadastro
+                        product = new Product(); // Limpa os dados para novo cadastro
                     }
 
                 }

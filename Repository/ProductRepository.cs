@@ -3,18 +3,18 @@ using Npgsql;
 
 namespace cadastro_cliente.Repository
 {
-    public class ClientRepository
+    public class ProductRepository
     {
         private readonly string connString;
 
-        public ClientRepository(string connString)
+        public ProductRepository(string connString)
         {
             this.connString = connString;
         }
 
-        public bool CadastrarCliente(Client cliente)
+        public bool CadastrarProduto(Product produto)
         {
-            string query = "INSERT INTO cliente (nome, telefone, limite_credito) VALUES (@nome, @telefone, @limite_credito)";
+            string query = "INSERT INTO produto (nome, preco, codigo) VALUES (@nome, @preco, @codigo)";
 
             try
             {
@@ -22,9 +22,9 @@ namespace cadastro_cliente.Repository
                 conn.Open();
                 NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
 
-                cmd.Parameters.AddWithValue("@nome", cliente.nome ?? string.Empty);
-                cmd.Parameters.AddWithValue("@telefone", cliente.telefone ?? string.Empty);
-                cmd.Parameters.AddWithValue("@limite_credito", decimal.TryParse(cliente.limite_credito, out decimal valor) ? valor : 0m);
+                cmd.Parameters.AddWithValue("@nome", produto.nome ?? string.Empty);
+                cmd.Parameters.AddWithValue("@preco", produto.preco);
+                cmd.Parameters.AddWithValue("@codigo", produto.codigo ?? string.Empty);
 
                 int linhasAfetadas = cmd.ExecuteNonQuery();
                 return linhasAfetadas > 0;

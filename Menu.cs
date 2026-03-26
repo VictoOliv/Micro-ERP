@@ -33,11 +33,12 @@ namespace cadastro_cliente
                         Login.Main([]);
                         break;
                     case "2":
+                        Console.WriteLine("Cadastrar cliente selecionado.");
                         ClientConn.CadastrarClienteMenu(connString);
                         break;
                     case "3":
-                        // TODO: chamar método para cadastrar produto
                         Console.WriteLine("Cadastrar Produto selecionado.");
+                        ProductConn.CadastrarProdutoMenu(connString, 0);
                         break;
                     case "4":
                         // TODO: chamar método para cadastrar venda
